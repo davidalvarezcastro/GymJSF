@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<ui:include src="head.xhtml" />
+	<title>${msgs.titulo}</title>
+</h:head>
+<h:body onload="setTitleBreadcrumb('#{msgs.tituloMain}')">
+	<ui:include src="menu.xhtml" />
+
+	<div class="app">
+		<h1>${msgs.tituloMain}</h1>
+
+		<!-- notificaciones  -->
+		<c:if test="${not empty activityController.getErrors()}">
+			<p class="error_msg">#{activityController.getErrors()}</p>
+		</c:if>
+		<c:if test="${not empty participateController.getSuccess()}">
+	        <p class="success_msg">#{participateController.getSuccess()}</p>
+	    </c:if>
+
+		<div class="content">
+			<h:form style="float: right">
+				<h:commandLink rendered="${loginController.isAdmin()}" styleClass="btn success" onclick="return alert('Formato JSP no refactorizado')">
+					<ion-icon class="icon" name="add-outline"></ion-icon>
+				</h:commandLink>
+			</h:form>
+			<h1>${msgs.tabla_titulo_actividades_inscritas}</h1>
+			<h:dataTable id="table-activities-participar" value="${activityController.getActivitiesParticipate(loginController.getId())}" var="activity" styleClass="table" headerClass="table-header" rowClasses="table-odd-row, table-even-row">
+				<h:column>
+					<f:facet name="header">${msgs.tabla_titulo}</f:facet>
+			            #{activity.getTitle()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_descripcion}</f:facet>
+			            #{activity.getDescription()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_sugerencias}</f:facet>
+			            #{activity.getSuggestions()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_docentes}</f:facet>
+			            #{activity.getTeachers()}
+			    </h:column>
+			    <h:column>
+					<f:facet name="header">${msgs.tabla_participantes}</f:facet>
+			            #{activity.getParticipations()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_dias}</f:facet>
+			            #{activity.getDays()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_hora}</f:facet>
+			            #{activity.getSchedule()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_fecha_inicio}</f:facet>
+			            #{activity.getDateStart()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_fecha_fin}</f:facet>
+			            #{activity.getDateEnd()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_operaciones}</f:facet>
+					<h:form class="operaciones">
+						<h:commandLink styleClass="btn info" action="#{activityController.goToActivityView(activity.getIdStr())}">
+							<ion-icon class="icon" name="eye-outline"></ion-icon>
+						</h:commandLink>
+						<h:commandLink rendered="${activityController.allowVoting(activity, loginController.getId())}" styleClass="btn warning" action="#{activityController.goToActivityView(activity.getIdStr())}">
+							<ion-icon class="icon" name="archive-outline"></ion-icon>
+						</h:commandLink>
+					</h:form>
+				</h:column>
+			</h:dataTable>
+		</div>
+
+		<div class="content">
+			<h1>${msgs.tabla_titulo_actividades_registradas}</h1>
+			<h:dataTable id="table-activities" value="${activityController.getActivitiesNoParticipate(loginController.getId())}" var="activity" styleClass="table" headerClass="table-header" rowClasses="table-odd-row, table-even-row">
+				<h:column>
+					<f:facet name="header">${msgs.tabla_titulo}</f:facet>
+			            #{activity.getTitle()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_descripcion}</f:facet>
+			            #{activity.getDescription()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_sugerencias}</f:facet>
+			            #{activity.getSuggestions()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_docentes}</f:facet>
+			            #{activity.getTeachers()}
+			    </h:column>
+			    <h:column>
+					<f:facet name="header">${msgs.tabla_participantes}</f:facet>
+			            #{activity.getParticipations()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_dias}</f:facet>
+			            #{activity.getDays()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_hora}</f:facet>
+			            #{activity.getSchedule()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_fecha_inicio}</f:facet>
+			            #{activity.getDateStart()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_fecha_fin}</f:facet>
+			            #{activity.getDateEnd()}
+			    </h:column>
+				<h:column>
+					<f:facet name="header">${msgs.tabla_operaciones}</f:facet>
+					<h:form class="operaciones">
+						<h:commandLink rendered="${loginController.isAdmin()}" styleClass="btn warning" onclick="return alert('Formato JSP no refactorizado')">
+							<ion-icon class="icon" name="create-outline"></ion-icon>
+						</h:commandLink>
+						<h:commandLink rendered="${loginController.isAdmin()}" styleClass="btn danger" onclick="return alert('Formato JSP no refactorizado')">
+							<ion-icon class="icon" name="trash-outline"></ion-icon>
+						</h:commandLink>
+						<h:commandLink styleClass="btn info" action="#{activityController.goToActivityView(activity.getIdStr())}">
+							<ion-icon class="icon" name="eye-outline"></ion-icon>
+						</h:commandLink>
+						<h:commandLink rendered="${activityController.allowParticipate(activity, loginController.getId())}" styleClass="btn success" action="#{activityController.goToParticipateView(activity.getIdStr())}">
+							<ion-icon class="icon" name="bag-add-outline"></ion-icon>
+						</h:commandLink>
+					</h:form>
+				</h:column>
+			</h:dataTable>
+		</div>
+	</div>
+	<br />
+	<br />
+</h:body>
+</html>

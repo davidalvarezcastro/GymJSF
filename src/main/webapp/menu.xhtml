@@ -1,0 +1,28 @@
+<div xmlns:h="http://java.sun.com/jsf/html" class="navigation">
+	<ul>
+	  <li class="list active">
+		  <a class="active" href="${pageContext.request.contextPath}/socios/faces/main.xhtml">
+		  	<p class="icon"><ion-icon name="home-outline"></ion-icon></p>
+		  	<p class="text">Home</p>
+		  </a>
+	  </li>
+	  <p id="breadcrumb-top-menu" class="breadcrumb"></p>
+	</ul>
+	<ul>
+	  <li class="list">
+		  <a class="active" href="${pageContext.request.contextPath}/socios/faces/users/registrar.xhtml">
+		  	<p class="icon"><ion-icon name="person-add-outline"></ion-icon></p>
+		  	<p class="text">Registrar</p>
+		  </a>
+	  </li>
+	  <li class="list">
+			  <h:form id="form-logout"> 
+			  	<h:commandButton id="hide-button-logout" style="display:none" action="#{loginController.logout()}"/>
+			  </h:form>
+		  <a class="active" onclick="clickLogout()">
+		  	<p class="icon"><ion-icon name="log-out-outline"></ion-icon></p>
+		  	<p class="text">Logout</p>
+		  </a>
+	  </li>
+	</ul>
+</div>

@@ -1,0 +1,61 @@
+<div
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+>
+	<!-- MODAL PARA SUBIR FICHEROS -->
+	<div id="modal-ficheros" class="modal">
+		<div class="modal-content">
+			<span class="close">x</span>
+			<h:form class="form" enctype="multipart/form-data">
+				<!-- <button type="button" class="btn text success" onclick="anhadir_fichero()"> <ion-icon class="icon" name="add-outline"></ion-icon> </button> -->
+				<div id="new_files" class="file-list">
+					<div class="add-file">
+						<h:outputText value="#{msgs.ficheros_titulo}" />
+						<h:inputFile
+							name="file" p:multiple="multiple" value="#{fileController.file}"
+							p:accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*"
+						/>
+						<div style="text-align: right;">
+							<h:commandLink style="float: rigth" styleClass="btn success" action="#{fileController.upload()}">
+								#{msgs.button_upload_files}
+							</h:commandLink>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</div>
+
+	<button style="float: right" class="btn info" id="modal-ficheros-button">
+		<ion-icon class="icon" name="document-outline"></ion-icon>${msgs.button_add_files}
+	</button>
+    
+  	<h1>${msgs.tabla_titulo_ficheros}</h1>
+  	<!-- Notificaciones -->
+	<c:if test="${not empty fileController.getSuccess()}">
+        <p class="success_msg">#{fileController.getSuccess()}</p>
+    </c:if>
+	<h:dataTable id="table-files" value="${activityController.getFilesActivity()}" var="file" styleClass="table" headerClass="table-header" rowClasses="table-odd-row, table-even-row">
+		<h:column>
+			<f:facet name="header">${msgs.tabla_titulo}</f:facet>
+	            #{file.getTitle()}
+	    </h:column>
+	    <h:column>
+			<f:facet name="header">${msgs.tabla_ruta}</f:facet>
+	            #{file.getRoute()}
+	    </h:column>
+		<h:column>
+			<f:facet name="header">${msgs.tabla_operaciones}</f:facet>
+			<h:form class="operaciones">
+				<h:commandLink styleClass="btn success" action="#{fileController.download(file)}">
+					<ion-icon class="icon" name="cloud-download-outline"></ion-icon>
+				</h:commandLink>
+			</h:form>
+		</h:column>
+	</h:dataTable>
+</div>

@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+
+.btn {
+  padding: 8px 12px;
+  color: white;
+  background-color: lightgrey;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.no-margin {
+	margin: 0;
+}
+
+.btn.text {
+  border: none;
+  color: blue;
+  background-color: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn .icon {
+	font-size: 1.25em;
+}
+
+.btn.text.danger {
+	color: red
+}
+
+.btn.text.success {
+	color: #4CAF50
+}
+
+.btn.text.info {
+	color: #888a85
+}
+
+.btn.text.white {
+	color: white
+}
+
+.btn:hover {opacity: 0.7}
+.btn:not(.text):active {
+	box-shadow: 0 5px #666;
+  	transform: translateY(2px);
+}
+
+.success {background-color: #4CAF50;}
+.info {background-color: #888a85;}
+.warning {background-color: orange;}
+.danger {background-color: red;}
+.default {background-color: black;}
+

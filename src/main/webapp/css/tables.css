@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: grey;
+  color: white;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {
+  background-color: #dddddd;
+}
+
+.operaciones
+{
+	min-width: 150px;
+	max-width: 200px;
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
+}
+
+.operaciones.btn
+{
+	margin: 0 10px;
+}

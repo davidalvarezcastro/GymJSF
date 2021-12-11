@@ -1,0 +1,92 @@
+@charset "UTF-8";
+@import "buttons.css";
+@import "card.css";
+@import "forms.css";
+@import "menu.css";
+@import "modal.css";
+@import "tables.css";
+
+body {
+	margin: 0 auto;
+	background-color: #fff;
+}
+
+.app {
+	/* margin-top: 75px; */
+	padding: 10px 20px;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.bolder {
+	font-size: 1.25em;
+	font-weight: bolder;
+}
+
+.content {
+	padding: 5px 25px;
+	margin: 15px 0;
+	border-top: 2px solid lightgrey;
+	height: 100%;
+}
+
+.aditionals {
+	display: flex;
+	justify-content: end;
+}
+
+.title {
+	text-align: center;
+}
+
+
+.hide-element {
+	display: none
+}
+
+.warning_msg {
+	color: orange;
+	font-weight: bolder;
+	font-size: 1.5em;
+}
+
+.error_msg {
+	color: red;
+	font-weight: bolder;
+	font-size: 1.5em;
+}
+
+.success_msg {
+	color: green;
+	font-weight: bolder;
+	font-size: 1.5em;
+}
+
+.file-list {
+	padding: 15px;
+	max-height: 250px;
+	overflow: auto;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex.space-between {
+	justify-content: space-between;
+}
+
+.msg {
+	margin: 0px !important;
+}
+
+/* PRIME FACES */
+.ui-rating .ui-rating-cancel {
+	display: none !important;
+}

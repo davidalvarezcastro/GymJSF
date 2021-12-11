@@ -1,0 +1,60 @@
+<!-- solo votan en caso de estar participando -->
+
+   <div class="votes"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+>
+	<c:choose>
+	  <c:when test="${voteController.allowVoting()}">
+	  	<h:form id="voteForm" class="form nocolor inline" autocomplete="off">
+	
+			<h:outputText value="#{msgs.voting_puntuacion}" />
+			<pf:rating name="voto" value="#{voteController.vote}" />
+	
+			<h:outputText value="#{msgs.voting_comentarios}" />
+			<h:inputTextarea row="10" col="10" name="comentarios" value="#{voteController.comments}" p:placeholder="#{msgs.voting_comentarios}" autocomplete="off"/>
+
+			<!-- notificaciones  -->
+			<c:if test="${not empty participateController.getErrors()}">
+		        <p class="error_msg">#{voteController.getErrors()}</p>
+		    </c:if>
+
+		    <c:if test="${not empty participateController.getSuccess()}">
+		        <p class="success_msg">#{voteController.getSuccess()}</p>
+		    </c:if>
+	
+			<h:commandButton class="btn success" value="#{msgs.button_votar}" action="#{voteController.voting()}" />
+			<h:commandButton class="btn info" value="#{msgs.button_reset}" type="reset"/>
+		</h:form>
+	  </c:when>
+	  <c:otherwise>
+	  	<c:choose>
+		  <c:when test="${activityController.allowParticipate(activityController.getActivity(), loginController.getId())}">
+		    <h5 class="msg warning_msg">${msgs.warning_votar_participar}</h5>
+		  </c:when>
+		  <c:otherwise>
+		  	<c:choose>
+			  <c:when test="${activityController.getActivity().activityEnded()}">
+			    <!-- <h5 class="msg warning_msg">${msgs.warning_votar_finalizada}</h5> -->
+			  </c:when>
+			  <c:otherwise>
+			  	<h5 class="msg warning_msg">${msgs.warning_votar_finalizar}</h5>
+			  </c:otherwise>
+			</c:choose>
+		  </c:otherwise>
+		</c:choose>
+	    <h:form>
+	    	<h:commandLink
+	    		rendered="${activityController.allowParticipate(activityController.getActivity(), loginController.getId())}" styleClass="btn success"
+	    		action="#{activityController.goToParticipateView(activityController.getActivity().getIdStr())}">
+				${msgs.button_participar}
+			</h:commandLink>
+	    </h:form>
+	  </c:otherwise>
+	</c:choose>
+</div>
